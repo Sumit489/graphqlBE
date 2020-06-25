@@ -1,5 +1,5 @@
 const express = require("express")
-const employerepo = require("../Repositories/employee.repository")
+
 const app =express()
 const mongoose = require("mongoose")
 const port = 5000;
@@ -15,7 +15,7 @@ class Server{
         this.initDB();
         // this.initRoutes();
         // this.start();
-        this.employerepo = new employerepo
+        
     }
 
     start(){
@@ -78,16 +78,16 @@ class Server{
             resolvers: {
                 Query:{
                     getEmployees:(parent,args)=>{
-                        employerepo.graphqlgetEmployees()
+                        return Employee.find({}).populate("projects","name description startdate enddate")
                     },
                     getEmployee:(parent,args)=>{
-                        employerepo.graphqlgetEmployee(args)
+                        return Employee.findById(args.id).populate("projects","name description startdate enddate")
                     },
                     getProjects:(parent,args)=>{
-                        employerepo.graphqlgetProjects()
+                        return Project.find({})
                     },
                     getProject:(parent,args)=>{
-                        employerepo.graphqlgetProject(args)
+                        return Project.findById(args.id)
                     }
                 },
                 Mutation:{

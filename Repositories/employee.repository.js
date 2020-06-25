@@ -2,7 +2,7 @@ const { Mongoose } = require("mongoose");
 
 const mongoose = require('mongoose');
 const Employee = mongoose.model("Employee")
-
+const Project = mongoose.model("Project")
 
 class employeeRepository{
     addEmployee(datas,callback){
